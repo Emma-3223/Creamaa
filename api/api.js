@@ -14,7 +14,7 @@ app.use('/api/auth', authRoute);
 
 // Connecting the server to the backend
 mongoose
-    .connect(process.env.MONGO)
+    .connect(process.env.MONGODB_URL)
     .then(() => {
         console.log('Connected to MongoDB')
     })
