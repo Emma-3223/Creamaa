@@ -1,7 +1,7 @@
 {
   "name": "Creamaa",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon api/api.js",
@@ -20,7 +20,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.1",
     "multer": "^1.4.5-lts.2",
-    "nodemon": "^3.1.9",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.7.0",
     "prisma": "^6.7.0"
   }
 }

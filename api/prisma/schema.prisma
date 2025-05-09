@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // output   = "../generated/prisma"
 }
 
 datasource db {
@@ -24,3 +24,7 @@ model User {
   avatar String?
   createdAt  DateTime @default(now())
 }
+
+// REMEMBER TO PUSH THE DB ALWAYS 
+// WHEN CHANGES ARE MADE ON THE PRISMA SCHEMA
+// "npx prisma db push"
