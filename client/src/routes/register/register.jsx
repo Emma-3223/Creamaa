@@ -1,24 +1,54 @@
-import "./register.scss";
-import { Link } from "react-router-dom";
+import { useState } from 'react'
+import './register.scss'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-function Register() {
+function Register () {
+  // STATES
+  const [error, setError] = useState('')
+
+  //OTHER HOOKS
+  const navigate = useNavigate()
+
+  // HANDLE SUBMIT
+  const handleSubmit = async e => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+
+    const username = formData.get('username')
+    const email = formData.get('email')
+    const password = formData.get('password')
+    try {
+      const res = await axios.post('http://localhost:3000/api/auth/register', {
+        username,
+        email,
+        password
+      })
+      navigate('/login')
+    } catch (err) {
+      console.log(error)
+      setError(err.response.data.message)
+    }
+  }
+  // RENDER UI
   return (
-    <div className="register">
-      <div className="formContainer">
-        <form>
+    <div className='register'>
+      <div className='formContainer'>
+        <form onSubmit={handleSubmit}>
           <h1>Create an Account</h1>
-          <input name="username" type="text" placeholder="Username" />
-          <input name="email" type="text" placeholder="Email" />
-          <input name="password" type="password" placeholder="Password" />
-          <button >Register</button>
-          <Link to="/login">Do you have an account?</Link>
+          <input name='username' type='text' placeholder='Username' />
+          <input name='email' type='text' placeholder='Email' />
+          <input name='password' type='password' placeholder='Password' />
+          <button>Register</button>
+          {error && <span>{error}</span>}
+          <Link to='/login'>Do you have an account?</Link>
         </form>
       </div>
-      <div className="imgContainer">
-        <img src="/bg.png" alt="" />
+      <div className='imgContainer'>
+        <img src='/bg.png' alt='' />
       </div>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register

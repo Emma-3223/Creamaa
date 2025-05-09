@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+*.sqlite
+*.db
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -23,3 +26,6 @@ dist-ssr
 *.sln
 *.sw?
 .env
+.prisma/
+node_modules/.prisma/
+prisma/dev.db

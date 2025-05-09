@@ -4,11 +4,13 @@ import cookieParser from "cookie-parser"
 import dotenv from 'dotenv'
 import postRoute from './routes/post.route.js'
 import authRoute from './routes/auth.route.js'
+import cors from "cors"
 
 
 const app = express()
-dotenv.config()
+dotenv.config({ origin: process.env.CLIENT_URL, credentials: true })
 app.use(express.json())
+app.use(cors())
 app.use('/api/posts', postRoute)
 app.use('/api/auth', authRoute);
 app.use(cookieParser());
