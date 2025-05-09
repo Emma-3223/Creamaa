@@ -1,7 +1,7 @@
 {
   "name": "Creamaa",
   "version": "1.0.0",
-  "main": "api.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon api/api.js",
@@ -15,6 +15,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^2.6.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
