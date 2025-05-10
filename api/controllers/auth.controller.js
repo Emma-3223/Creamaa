@@ -30,6 +30,8 @@ export const register = async (req, res) => {
 // LOGIN
 export const login = async (req, res) => {
     const { username, password } = req.body;
+    // ✅ Clear any previous error
+    //   setError('');
     try {
         // CHECK IF USER EXIST
         const user = await prisma.user.findUnique({
@@ -38,14 +40,18 @@ export const login = async (req, res) => {
         if (!user) return res.status(401).json({ message: "Invalid Credentials" })
         // CHECK IF PASSWORD IS CORRECT
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (isPasswordValid) return res.status(401).json({ message: "Invalid Credentials" })
+        if (!isPasswordValid) return res.status(401).json({ message: "Invalid Credentials" })
 
         // GENERATE COOKIE TOKEN AND SEND TO THE USER
         const age = 1000 * 60 * 60 * 7 // Session expiry
         const token = jwt.sign({
             id: user.id
         }, process.env.JWT_SECRET_KEY, { expiresIn: age });
-        // res.setHeader("set-Cookie", "test=" + "myValue").json("success")
+
+        // USER INFO ON LOGIN
+        const { password: userPassword, ...userInfo } = user
+        // console.log(user)
+
 
         res.
             cookie("access_token", token, {
@@ -54,7 +60,9 @@ export const login = async (req, res) => {
                 // secure:true (While in production)
             })
             .status(200)
-            .json({ message: "Login Successful" })
+            .json({userInfo })
+            console.log(userInfo)
+
 
 
     } catch (error) {
